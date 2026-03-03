@@ -1,11 +1,18 @@
-document.getElementById('generar').addEventListener('click', generarCarton);
+const inputNumero = document.getElementById('numero');
+let timeoutId;
+
+inputNumero.addEventListener('input', () => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(generarCarton, 300); // Debounce: espera 300ms después de escribir
+});
 
 function generarCarton() {
-    const seed = parseInt(document.getElementById('numero').value);
-    if (isNaN(seed) || seed < 1) {
-        alert('Ingresa un número válido mayor a 0.');
+    const seedValue = inputNumero.value.trim();
+    if (!seedValue || isNaN(seedValue) || parseInt(seedValue) < 1) {
+        document.getElementById('carton-container').innerHTML = ''; // Limpia si inválido
         return;
     }
+    const seed = parseInt(seedValue);
 
     // Setear la semilla para random determinístico
     Math.seedrandom(seed);
@@ -27,7 +34,7 @@ function generarCarton() {
     }
 
     // Centro libre (fila 2, columna 2 en 0-index)
-    carton[2][2] = 'LIBRE';
+    carton[2][2] = 'LIBRE ⭐';
 
     // Renderizar la tabla
     const container = document.getElementById('carton-container');
@@ -48,8 +55,8 @@ function generarCarton() {
         const tr = document.createElement('tr');
         for (let col = 0; col < 5; col++) {
             const td = document.createElement('td');
-            td.textContent = carton[col][row]; // Nota: transponemos para filas
-            if (td.textContent === 'LIBRE') {
+            td.textContent = carton[col][row]; // Transponemos para filas
+            if (td.textContent === 'LIBRE ⭐') {
                 td.classList.add('free');
             }
             tr.appendChild(td);
