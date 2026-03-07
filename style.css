@@ -4,31 +4,27 @@ body {
     color: #FFFFFF;
     text-align: center;
     margin: 0;
-    /* Eliminamos overflow hidden para que no corte el cartón */
-    overflow-x: hidden;
+    /* IMPORTANTE: Permitir scroll y quitar el bloqueo de altura */
+    min-height: 100vh;
+    display: block; /* Cambiamos flex por block para evitar que se centre a la fuerza */
     overflow-y: auto; 
     position: relative;
-    display: flex;
-    flex-direction: column; /* Cambiado a columna para mejor control */
-    align-items: center;
-    justify-content: center; /* Centra el contenido en el espacio disponible */
-    min-height: 100vh;
-    /* Padding simétrico: 20px arriba, 20px lados, 60px abajo para que no pegue al borde */
-    padding: 20px 20px 60px 20px; 
+    /* Padding superior moderado y un padding INFERIOR GRANDE de 100px */
+    padding: 20px 15px 100px 15px; 
     box-sizing: border-box;
 }
 
 .container {
-    max-width: 800px;
-    width: 100%;
-    /* Eliminamos márgenes internos que puedan estar sumando espacio arriba */
-    padding: 0; 
-    margin: 0 auto;
+    max-width: 600px;
+    margin: 0 auto; /* Centra horizontalmente el bloque */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 body::before {
     content: '';
-    position: absolute;
+    position: fixed; /* Fixed para que el fondo neón no se mueva al hacer scroll */
     top: 0;
     left: 0;
     width: 100%;
@@ -49,9 +45,9 @@ h1 {
     font-family: 'Press Start 2P', cursive;
     color: #FF00FF;
     text-shadow: 0 0 10px #FF00FF, 0 0 20px #FF00FF;
-    font-size: 2.2em; /* Un poco más pequeño para ahorrar espacio arriba */
-    margin-top: 0; /* Elimina espacio blanco superior */
-    margin-bottom: 20px;
+    font-size: 1.8em; /* Ajustado para móviles */
+    margin: 20px 0;
+    line-height: 1.4;
     animation: neon-flicker 1.5s infinite alternate;
 }
 
@@ -61,94 +57,84 @@ h1 {
 }
 
 .input-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 20px;
+    width: 100%;
+    margin-bottom: 25px;
 }
 
 label {
-    font-size: 1.1em;
+    display: block;
+    font-size: 1em;
     color: #00FFFF;
     text-shadow: 0 0 5px #00FFFF;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
 
 input {
     padding: 12px;
-    font-size: 1.3em;
-    background-color: rgba(0, 0, 0, 0.7);
+    font-size: 1.2em;
+    background-color: rgba(0, 0, 0, 0.8);
     color: #00FF00;
     border: 2px solid #00FF00;
     border-radius: 10px;
     text-align: center;
-    box-shadow: 0 0 10px #00FF00;
-    width: 100%;
-    max-width: 250px;
-}
-
-input:focus {
-    outline: none;
-    box-shadow: 0 0 20px #00FF00, 0 0 30px #00FF00;
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+    width: 80%;
+    max-width: 200px;
 }
 
 #carton-container {
+    width: 100%;
     display: flex;
     justify-content: center;
-    margin-top: 10px;
-    padding-bottom: 20px; /* Espacio extra interno */
+    /* Este margen asegura que el cartón se separe del input */
+    margin-top: 20px; 
     animation: fade-in 0.5s ease-in-out;
 }
 
 @keyframes fade-in {
-    from { opacity: 0; transform: scale(0.9); }
-    to { opacity: 1; transform: scale(1); }
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 table {
     border-collapse: separate;
-    border-spacing: 5px;
+    border-spacing: 6px;
     width: 100%;
-    max-width: 450px; /* Ajustado para que no sea excesivamente alto */
+    max-width: 400px;
 }
 
 th, td {
     width: 20%;
     aspect-ratio: 1 / 1;
-    font-size: 1.4em;
+    font-size: 1.2em;
     font-weight: bold;
-    border-radius: 10px;
-    transition: transform 0.2s, box-shadow 0.2s;
-    box-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
-    padding: 8px;
-    box-sizing: border-box;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    padding: 0;
+    vertical-align: middle;
 }
 
 th {
-    background: linear-gradient(#FFD700, #FF8C00);
+    background: linear-gradient(180deg, #FFD700, #FF8C00);
     color: #000;
 }
 
 td {
-    background: linear-gradient(#1E90FF, #00BFFF);
+    background: linear-gradient(180deg, #1E90FF, #00BFFF);
     color: #FFF;
+    text-shadow: 1px 1px 2px #000;
 }
 
+/* Ajuste para que el cuadro LIBRE se vea bien */
 .free {
-    background: linear-gradient(#FF4500, #FF1493);
-    color: #FFD700;
-    font-size: 1em;
+    background: linear-gradient(145deg, #FF4500, #FF1493) !important;
+    position: relative;
+    overflow: hidden;
 }
 
-/* Responsividad mejorada */
-@media (max-width: 600px) {
-    body {
-        padding: 10px 10px 40px 10px;
-    }
-    h1 {
-        font-size: 1.5em;
-    }
-    th, td {
-        font-size: 0.9em;
-    }
+/* Responsividad para pantallas muy pequeñas */
+@media (max-width: 400px) {
+    h1 { font-size: 1.4em; }
+    th, td { font-size: 1em; }
+    body { padding-bottom: 120px; } /* Más espacio aún en pantallas pequeñas */
 }
