@@ -1,2 +1,140 @@
+body {
+    font-family: 'Orbitron', sans-serif;
+    background: linear-gradient(135deg, #0F2027, #203A43, #2C5364);
+    color: #FFFFFF;
+    text-align: center;
+    margin: 0;
+    /* IMPORTANTE: Permitir scroll y quitar el bloqueo de altura */
+    min-height: 100vh;
+    display: block; /* Cambiamos flex por block para evitar que se centre a la fuerza */
+    overflow-y: auto; 
+    position: relative;
+    /* Padding superior moderado y un padding INFERIOR GRANDE de 100px */
+    padding: 20px 15px 100px 15px; 
+    box-sizing: border-box;
+}
 
-st
+.container {
+    max-width: 600px;
+    margin: 0 auto; /* Centra horizontalmente el bloque */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+body::before {
+    content: '';
+    position: fixed; /* Fixed para que el fondo neón no se mueva al hacer scroll */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(0,255,255,0.2), transparent);
+    z-index: -1;
+    animation: pulse 5s infinite;
+    pointer-events: none;
+}
+
+@keyframes pulse {
+    0% { opacity: 0.5; }
+    50% { opacity: 1; }
+    100% { opacity: 0.5; }
+}
+
+h1 {
+    font-family: 'Press Start 2P', cursive;
+    color: #FF00FF;
+    text-shadow: 0 0 10px #FF00FF, 0 0 20px #FF00FF;
+    font-size: 1.8em; /* Ajustado para móviles */
+    margin: 20px 0;
+    line-height: 1.4;
+    animation: neon-flicker 1.5s infinite alternate;
+}
+
+@keyframes neon-flicker {
+    0% { text-shadow: 0 0 10px #FF00FF; }
+    100% { text-shadow: 0 0 20px #FF00FF, 0 0 30px #FF00FF; }
+}
+
+.input-section {
+    width: 100%;
+    margin-bottom: 25px;
+}
+
+label {
+    display: block;
+    font-size: 1em;
+    color: #00FFFF;
+    text-shadow: 0 0 5px #00FFFF;
+    margin-bottom: 15px;
+}
+
+input {
+    padding: 12px;
+    font-size: 1.2em;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #00FF00;
+    border: 2px solid #00FF00;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+    width: 80%;
+    max-width: 200px;
+}
+
+#carton-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    /* Este margen asegura que el cartón se separe del input */
+    margin-top: 20px; 
+    animation: fade-in 0.5s ease-in-out;
+}
+
+@keyframes fade-in {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+table {
+    border-collapse: separate;
+    border-spacing: 6px;
+    width: 100%;
+    max-width: 400px;
+}
+
+th, td {
+    width: 20%;
+    aspect-ratio: 1 / 1;
+    font-size: 1.2em;
+    font-weight: bold;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    padding: 0;
+    vertical-align: middle;
+}
+
+th {
+    background: linear-gradient(180deg, #FFD700, #FF8C00);
+    color: #000;
+}
+
+td {
+    background: linear-gradient(180deg, #1E90FF, #00BFFF);
+    color: #FFF;
+    text-shadow: 1px 1px 2px #000;
+}
+
+/* Ajuste para que el cuadro LIBRE se vea bien */
+.free {
+    background: linear-gradient(145deg, #FF4500, #FF1493) !important;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Responsividad para pantallas muy pequeñas */
+@media (max-width: 400px) {
+    h1 { font-size: 1.4em; }
+    th, td { font-size: 1em; }
+    body { padding-bottom: 120px; } /* Más espacio aún en pantallas pequeñas */
+}
