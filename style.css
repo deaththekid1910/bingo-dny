@@ -1,23 +1,29 @@
 body {
     font-family: 'Orbitron', sans-serif;
-    background: linear-gradient(135deg, #0F2027, #203A43, #2C5364); /* Gradiente neón oscuro gamer */
+    background: linear-gradient(135deg, #0F2027, #203A43, #2C5364);
     color: #FFFFFF;
     text-align: center;
-    padding: 40px 20px 80px 20px; /* Aumentado padding superior e inferior (80px abajo) */
     margin: 0;
-    overflow-y: auto; /* Cambiado de hidden a auto para permitir ver todo el cartón */
+    /* Eliminamos overflow hidden para que no corte el cartón */
+    overflow-x: hidden;
+    overflow-y: auto; 
     position: relative;
     display: flex;
-    justify-content: center;
-    align-items: flex-start; /* Cambiado de center a flex-start para que no se oculte abajo */
+    flex-direction: column; /* Cambiado a columna para mejor control */
+    align-items: center;
+    justify-content: center; /* Centra el contenido en el espacio disponible */
     min-height: 100vh;
+    /* Padding simétrico: 20px arriba, 20px lados, 60px abajo para que no pegue al borde */
+    padding: 20px 20px 60px 20px; 
+    box-sizing: border-box;
 }
 
 .container {
     max-width: 800px;
     width: 100%;
-    padding: 20px;
-    box-sizing: border-box;
+    /* Eliminamos márgenes internos que puedan estar sumando espacio arriba */
+    padding: 0; 
+    margin: 0 auto;
 }
 
 body::before {
@@ -27,10 +33,10 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle, rgba(0,255,255,0.2), transparent); /* Glow neón */
+    background: radial-gradient(circle, rgba(0,255,255,0.2), transparent);
     z-index: -1;
     animation: pulse 5s infinite;
-    pointer-events: none; /* Para que no interfiera con los clics */
+    pointer-events: none;
 }
 
 @keyframes pulse {
@@ -41,9 +47,10 @@ body::before {
 
 h1 {
     font-family: 'Press Start 2P', cursive;
-    color: #FF00FF; /* Púrpura neón */
-    text-shadow: 0 0 10px #FF00FF, 0 0 20px #FF00FF; /* Glow effect */
-    font-size: 2.5em;
+    color: #FF00FF;
+    text-shadow: 0 0 10px #FF00FF, 0 0 20px #FF00FF;
+    font-size: 2.2em; /* Un poco más pequeño para ahorrar espacio arriba */
+    margin-top: 0; /* Elimina espacio blanco superior */
     margin-bottom: 20px;
     animation: neon-flicker 1.5s infinite alternate;
 }
@@ -57,27 +64,27 @@ h1 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 label {
-    font-size: 1.2em;
-    color: #00FFFF; /* Azul neón */
+    font-size: 1.1em;
+    color: #00FFFF;
     text-shadow: 0 0 5px #00FFFF;
     margin-bottom: 10px;
 }
 
 input {
-    padding: 15px;
-    font-size: 1.5em;
+    padding: 12px;
+    font-size: 1.3em;
     background-color: rgba(0, 0, 0, 0.7);
-    color: #00FF00; /* Verde lima */
+    color: #00FF00;
     border: 2px solid #00FF00;
     border-radius: 10px;
     text-align: center;
     box-shadow: 0 0 10px #00FF00;
     width: 100%;
-    max-width: 300px;
+    max-width: 250px;
 }
 
 input:focus {
@@ -88,7 +95,8 @@ input:focus {
 #carton-container {
     display: flex;
     justify-content: center;
-    margin-bottom: 50px; /* Margen extra debajo del cartón */
+    margin-top: 10px;
+    padding-bottom: 20px; /* Espacio extra interno */
     animation: fade-in 0.5s ease-in-out;
 }
 
@@ -100,68 +108,47 @@ input:focus {
 table {
     border-collapse: separate;
     border-spacing: 5px;
-    border: none;
     width: 100%;
-    max-width: 500px;
+    max-width: 450px; /* Ajustado para que no sea excesivamente alto */
 }
 
 th, td {
-    width: 20%; /* Para responsividad */
-    height: auto;
-    aspect-ratio: 1 / 1; /* Cuadradas */
-    font-size: 1.5em;
+    width: 20%;
+    aspect-ratio: 1 / 1;
+    font-size: 1.4em;
     font-weight: bold;
     border-radius: 10px;
     transition: transform 0.2s, box-shadow 0.2s;
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-    padding: 10px;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+    padding: 8px;
     box-sizing: border-box;
 }
 
 th {
-    background: linear-gradient(#FFD700, #FF8C00); /* Dorado a naranja */
+    background: linear-gradient(#FFD700, #FF8C00);
     color: #000;
-    text-shadow: 0 0 5px #FFF;
 }
 
 td {
-    background: linear-gradient(#1E90FF, #00BFFF); /* Azul profundo a cian */
+    background: linear-gradient(#1E90FF, #00BFFF);
     color: #FFF;
-    text-shadow: 0 0 5px #000;
-}
-
-td:hover {
-    transform: scale(1.1);
-    box-shadow: 0 0 20px #00FFFF, 0 0 30px #00FFFF;
 }
 
 .free {
-    background: linear-gradient(#FF4500, #FF1493); /* Naranja a rosa */
+    background: linear-gradient(#FF4500, #FF1493);
     color: #FFD700;
-    font-size: 1.2em;
-    text-shadow: 0 0 10px #FFD700;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    font-size: 1em;
 }
 
-/* Responsividad para móviles */
+/* Responsividad mejorada */
 @media (max-width: 600px) {
     body {
-        padding: 20px 10px 60px 10px;
+        padding: 10px 10px 40px 10px;
     }
-    
     h1 {
-        font-size: 1.8em;
+        font-size: 1.5em;
     }
-
-    input {
-        font-size: 1.2em;
-        padding: 10px;
-    }
-
     th, td {
-        font-size: 1em;
-        padding: 5px;
+        font-size: 0.9em;
     }
 }
