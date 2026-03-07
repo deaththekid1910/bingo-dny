@@ -3,13 +3,13 @@ body {
     background: linear-gradient(135deg, #0F2027, #203A43, #2C5364); /* Gradiente neón oscuro gamer */
     color: #FFFFFF;
     text-align: center;
-    padding: 20px;
+    padding: 40px 20px 80px 20px; /* Aumentado padding superior e inferior (80px abajo) */
     margin: 0;
-    overflow: hidden; /* Para efectos */
+    overflow-y: auto; /* Cambiado de hidden a auto para permitir ver todo el cartón */
     position: relative;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start; /* Cambiado de center a flex-start para que no se oculte abajo */
     min-height: 100vh;
 }
 
@@ -30,6 +30,7 @@ body::before {
     background: radial-gradient(circle, rgba(0,255,255,0.2), transparent); /* Glow neón */
     z-index: -1;
     animation: pulse 5s infinite;
+    pointer-events: none; /* Para que no interfiera con los clics */
 }
 
 @keyframes pulse {
@@ -87,6 +88,7 @@ input:focus {
 #carton-container {
     display: flex;
     justify-content: center;
+    margin-bottom: 50px; /* Margen extra debajo del cartón */
     animation: fade-in 0.5s ease-in-out;
 }
 
@@ -138,16 +140,17 @@ td:hover {
     color: #FFD700;
     font-size: 1.2em;
     text-shadow: 0 0 10px #FFD700;
-    animation: spin 2s infinite linear;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* Responsividad para móviles */
 @media (max-width: 600px) {
+    body {
+        padding: 20px 10px 60px 10px;
+    }
+    
     h1 {
         font-size: 1.8em;
     }
